@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Todas as solicitações</title>
+    </h:head>
+    <h:body>
+        
+           <ui:composition template="template.xhtml"> 
+            
+            <ui:define name="titulo_pagina">Solicitação - Consulta Prévia</ui:define>
+            
+            <ui:define name="form_manutencao">
+                
+                <h:form id="tabela">
+                    <p:dataTable id="dataTable" var="s" value="#{solicitanteMB.listSolicitantes()}" paginator="true" rows="5"  
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 rowsPerPageTemplate="5,10,15,20,25">
+                        <f:facet name="header">  
+                            <h:outputText value="Todas as Solicitações" /> 
+                        </f:facet>
+                        <p:column >  
+                            <f:facet name="header">
+                                <h:outputText value="CPF/CNPJ" />   
+                            </f:facet>
+                            <p:commandLink value="#{s.identificador}" update=":formulario">
+                                <f:setPropertyActionListener value="#{s}" target="#{solicitanteMB.solicitante}"/> 
+                            </p:commandLink>
+                        </p:column>
+                        <p:column >  
+                            <f:facet name="header">
+                                <h:outputText value="Nome" />   
+                            </f:facet>   
+                            <p:commandLink value="#{s.nome}" update=":formulario">
+                                <f:setPropertyActionListener value="#{s}" target="#{solicitanteMB.solicitante}"/> 
+                            </p:commandLink>
+                        </p:column>
+                        <p:column >  
+                            <f:facet name="header">
+                                <h:outputText value="Email" />   
+                            </f:facet>   
+                            <p:commandLink value="#{s.email}" update=":formulario">
+                                <f:setPropertyActionListener value="#{s}" target="#{solicitanteMB.solicitante}"/> 
+                            </p:commandLink>
+                        </p:column>
+                        <p:column >  
+                            <f:facet name="header">
+                                <h:outputText value="Telefone" />   
+                            </f:facet>   
+                            <p:commandLink value="#{s.telefone}" update=":formulario">
+                                <f:setPropertyActionListener value="#{s}" target="#{solicitanteMB.solicitante}"/> 
+                            </p:commandLink>
+                        </p:column>
+                        <p:column >  
+                            <f:facet name="header">
+                                <h:outputText value="Status" />   
+                            </f:facet>   
+                            <p:commandLink value="#{s.status}" update=":formulario">
+                                <f:setPropertyActionListener value="#{s}" target="#{solicitanteMB.solicitante}"/> 
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <hr></hr>
+
+                <!--Formulario de crud-->
+
+                <h:form id="formulario">
+                    <p:panel id="formPanel" header="Lista de Solicitações">
+                        <h:inputHidden value="#{solicitanteMB.solicitante.id}"/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="CPF:"/> 
+                            <h:outputText  escape="false" value="#{solicitanteMB.solicitante.identificador}"/>     
+                            <h:outputText value="Nome:"/> 
+                            <h:outputText value="#{solicitanteMB.solicitante.nome}"/> 
+                            <h:outputText value="Email:"/>
+                            <h:outputText value="#{solicitanteMB.solicitante.email}"/>
+                            <h:outputText value="Telefone:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.telefone}"/> 
+                            <h:outputText value="Contador:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.contador}"/> 
+                            <h:outputText value="Município:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.cidadeEmpresa}"/> 
+                            <h:outputText value="Natureza Jurídica:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.naturezaJuridica}"/> 
+                            <h:outputText value="Enquadramento:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.enquadramento}"/> 
+                            <h:outputText value="Nome - Opção 1:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.opcao1}"/> 
+                            <h:outputText value="Nome - Opção 2:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.opcao2}"/> 
+                            <h:outputText value="Nome - Opção 3:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.opcao3}"/> 
+                            <h:outputText value="Descrição do Objeto:"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.descricao}"/> 
+                            <h:outputText value="CNAE Principal"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.cnaePrincipal}"/> 
+                            <h:outputText value="CNAE Secundário"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.cnaeSecundario}"/> 
+                            <h:outputText value="Tipo de Atividade"/>  
+                            <h:outputText value="#{solicitanteMB.solicitante.dadosEmpresa.tipoUnidade}"/> 
+                            
+                            <h:outputLabel for="mensagem" value="Comentários sobre a solicitação: "/> 
+                            <p:inputTextarea  id="atividade"  value="#{solicitanteMB.mensagemEmail}"  label="mensagem"/>  
+                                <h:outputText id="mensagem"/>
+                                <p:message for="mensagem" /> 
+                        </h:panelGrid>
+                        <br/>
+                
+                        <p:commandButton value="Validar Solicitação." action="#{solicitanteMB.validarSolicitacao()}" update=":tabela, formulario"/>
+                        <p:commandButton value="Negar Solicitação." action="#{solicitanteMB.negarSolicitacao()}" update=":tabela, formulario"/>
+                        <p:commandButton value="Excluir todas as solicitações." action="#{solicitanteMB.excluirSolicitacoes()}" update=":tabela, formulario">
+                        <p:confirm header="Alerta" message="Confirma exclusão de todas as solicitações?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                        
+                        <b><h:outputText value="#{salaMB.mensagem}" style="font: bolder"/></b>
+                    </p:panel>
+                </h:form>
+                <hr></hr>
+                
+            </ui:define>
+           </ui:composition>
+
+    </h:body>
+</html>

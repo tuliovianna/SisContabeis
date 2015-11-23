@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"       
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Consulta Prévia - Abertura</title>
+    </h:head>
+    <h:body onload="document.getElementById('formulario:opcao1').focus();">
+        
+        <ui:composition template="template.xhtml"> 
+            
+            <ui:define name="titulo_pagina">Solicitação - Consulta Prévia</ui:define>
+            
+            <ui:define name="form_manutencao">
+        
+        <h:form id="formulario"> 
+            
+            <div align="right">
+            <p:graphicImage url="/img/redesim-rn.png"  width="100px" height="100px"/>
+            </div>
+            
+                <p:panel id="panel" header="Dados do Solicitante">     
+
+                        <h:panelGrid columns="1">
+
+                            <h:outputLabel for="identificador" value="CPF/CNPJ: *" /> 
+                            <p:inputMask mask="999.999.999-99" id="identificador"  
+                                         value="#{solicitanteMB.solicitante.identificador}" maxlength="10" requiredMessage="Campo Obrigatório" required="true" label="CPF/CNPJ"/>  
+                            <p:message for="identificador" />
+
+                            <h:outputLabel for="nome" value="Nome: *" />  
+                            <p:inputText id="nome" value="#{solicitanteMB.solicitante.nome}" required="true" requiredMessage="Campo Obrigatório" label="Nome"/>  
+                            <p:message for="nome" /> 
+
+                            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <p:outputLabel for="console" value="Contador:" />
+                                <p:selectOneRadio id="console" required="true" requiredMessage="Campo Obrigatório" value="#{solicitanteMB.solicitante.contador}">
+                                    <f:selectItem itemLabel="Sim" itemValue="Sim" />
+                                    <f:selectItem itemLabel="Não" itemValue="Não" />
+                                </p:selectOneRadio>
+                            </h:panelGrid>
+                            
+                            <h:outputLabel for="telefone" value="Telefone: *" />  
+                            <p:inputMask id="telefone" mask="(99)99999-9999" value="#{solicitanteMB.solicitante.telefone}" requiredMessage="Campo Obrigatório" required="true" label="Telefone"/>  
+                            <p:message for="telefone"/>
+                            
+                             <h:outputLabel for="email" value="Email: *" />  
+                             <p:inputText id="email" value="#{solicitanteMB.solicitante.email}" maxlength="40" validatorMessage="nome@example.com" requiredMessage="Campo Obrigatório" required="true" label="Email">     
+                                <f:validateRegex for="email" pattern="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$"/>
+                            </p:inputText>
+                            <p:message for="email" /> 
+                            
+                        </h:panelGrid> 
+                    </p:panel><br/>
+                    
+                    <p:panel id="panel2" header="Enquadramento">
+                    
+                     <p:outputLabel for="enquadramento" value="Enquadramento: " />
+                            <p:selectOneRadio id="enquadramento" layout="grid" columns="1" required="true" requiredMessage="Campo Obrigatório" value="#{solicitanteMB.dados.enquadramento}">
+                                    <f:selectItem itemLabel="ME (Microempresa) " itemValue="ME (Microempresa)" /> 
+                                    <f:selectItem itemLabel="EPP (Empresa de Pequeno Porte) " itemValue="EPP (Empresa de Pequeno Porte)" />
+                                    <f:selectItem itemLabel="Demais " itemValue="Demais" />
+                                </p:selectOneRadio>  
+                    </p:panel>
+                    <b><h:outputText value="#{solicitanteMB.mensagem}" style="font: bolder"/></b>   
+                    <br/>
+                    <p:commandButton  id="voltar" value="Voltar" immediate="true" action="./solicitante.xhtml"/>
+                    <p:commandButton  id="avancar" value="Avançar > " update="formulario"  action="#{solicitanteMB.pagina3()}"/>
+        </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

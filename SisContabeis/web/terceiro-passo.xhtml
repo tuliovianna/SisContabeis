@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"       
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Consulta Prévia - Abertura</title>
+    </h:head>
+    <h:body onload="document.getElementById('formulario:opcao1').focus();">
+        
+       <ui:composition template="template.xhtml"> 
+            
+            <ui:define name="titulo_pagina">Solicitação - Consulta Prévia</ui:define>
+            
+            <ui:define name="form_manutencao">
+                
+        <h:form id="formulario"> 
+            
+             <div align="right">
+            <p:graphicImage url="/img/redesim-rn.png"  width="100px" height="100px"/>
+            </div>
+            
+            <p:panel id="panel" header="Denominação Social / Firma Pretendida">
+                        
+                        <h:panelGrid columns="1">
+
+                            <h:outputLabel for="opcao1" value="Opção 1: *" />  
+                            <p:inputText id="opcao1" value="#{solicitanteMB.dados.opcao1}"  required="true" requiredMessage="Campo Obrigatório" label="opcao1"/>  
+                            <p:message for="opcao1" /> 
+                            
+                             <h:outputLabel for="opcao2" value="Opção 2: *" />  
+                             <p:inputText id="opcao2" value="#{solicitanteMB.dados.opcao2}" required="true" requiredMessage="Campo Obrigatório" label="opcao2"/>  
+                            <p:message for="opcao2" /> 
+                            
+                             <h:outputLabel for="opcao3" value="Opção 3: *" />  
+                             <p:inputText id="opcao3" value="#{solicitanteMB.dados.opcao3}" required="true" requiredMessage="Campo Obrigatório" label="opcao3"/>  
+                            <p:message for="opcao3" />                       
+                        </h:panelGrid> 
+                <br/> 
+                <p:commandButton  id="voltar" value=" Voltar" immediate="true" action="#{solicitanteMB.pagina2()}"/>
+                <p:commandButton  id="avancar" value="Avançar > " update="formulario"  action="#{solicitanteMB.pagina4()}"/> 
+                    </p:panel><br/>
+                    <b><h:outputText value="#{empresaMB.mensagem}" style="font: bolder"/></b>
+                    
+        </h:form>
+          
+            </ui:define>
+       </ui:composition>
+    </h:body>
+</html>
+    

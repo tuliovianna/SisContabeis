@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"       
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Consulta Prévia - Abertura</title>
+        
+    </h:head>
+    <h:body onload="document.getElementById('formulario:identificador').focus();">
+        
+        <link rel="icon" href="/faces/img/redesim-rn.jpg" type="image/ico" />
+        
+        
+        <ui:composition template="template.xhtml"> 
+            
+            <ui:define name="titulo_pagina">Solicitação - Consulta Prévia</ui:define>
+            
+            <ui:define name="form_manutencao">
+
+                <h:form id="formulario"> 
+                    
+                    <div align="right">
+                    <p:graphicImage url="/img/redesim-rn.png"  width="100px"  height="100px"/>
+                    </div>
+                    
+                    <p:panel id="panel2" header="Matriz">
+                        <h:panelGrid columns="1">
+                            
+                             <p:outputLabel for="cidade" value="Escolha a cidade onde deseja estabelecer sua empresa: " />
+                            <p:selectOneMenu id="cidade" required="true" style="width:200px" requiredMessage="Campo Obrigatório" value="#{solicitanteMB.dados.cidadeEmpresa}">
+                                <f:selectItem itemLabel="Selecione...         " itemValue="" />    
+                                <f:selectItem itemLabel="Caicó" itemValue="Caicó" /> 
+                                    <f:selectItem itemLabel="Currais Novos" itemValue="Currais Novos" />
+                                    <f:selectItem itemLabel="Natal" itemValue="Natal" />
+                            </p:selectOneMenu>
+                            
+                            <h:inputHidden value="#{solicitanteMB.dados.id}"/> 
+                            <p:outputLabel for="dados1" value="Escolha a natureza jurídica da sua empresa na lista abaixo: " />
+                            <p:selectOneMenu id="dados1" value="#{solicitanteMB.dados.naturezaJuridica}" required="true" requiredMessage="Campo Obrigatório" style="width:650px">
+                                <f:selectItem itemLabel="Selecione...         " itemValue="" />
+                                <f:selectItem itemLabel="Consórcio de Sociedades" itemValue="Consórcio de Sociedades" />
+                                <f:selectItem itemLabel="Cooperativa" itemValue="Cooperativa" />
+                                <f:selectItem itemLabel="Empresa Individual de Responsabilidade Limitada(de Natureza Empresária)" itemValue="Empresa Individual de Responsabilidade Limitada(de Natureza Empresária)" />
+                                <f:selectItem itemLabel="Empresa Pública" itemValue="Empresa Pública" />
+                                <f:selectItem itemLabel="Empresário (Individual)" itemValue="Empresário (Individual)" />
+                                <f:selectItem itemLabel="Sociedade Anônima Aberta" itemValue="Sociedade Anônima Aberta" />
+                                <f:selectItem itemLabel="Sociedade Anônima Fechada" itemValue="Sociedade Anônima Fechada" />
+                                <f:selectItem itemLabel="Sociedade de Economia Mista" itemValue="Sociedade de Economia Mista" />
+                                <f:selectItem itemLabel="Sociedade Empresária Limitada" itemValue="Sociedade Empresária Limitada" />  
+                            </p:selectOneMenu>
+                            <br/>
+                            <p:commandButton  id="avancar" value="Avançar > " update="formulario"  action="#{solicitanteMB.pagina2()}"/>
+                        </h:panelGrid>
+                    </p:panel>
+                    <br/>
+                     
+                </h:form> 
+                <br/>    
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

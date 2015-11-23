@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"       
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Consulta Prévia - Abertura</title>
+    </h:head>
+    <h:body onload="document.getElementById('formulario:opcao1').focus();">
+        
+       <ui:composition template="template.xhtml"> 
+            
+            <ui:define name="titulo_pagina">Solicitação - Consulta Prévia</ui:define>
+            
+            <ui:define name="form_manutencao">
+        
+        <h:form id="formulario">
+             
+             <div align="right">
+            <p:graphicImage url="/img/redesim-rn.png"  width="100px" height="100px"/>
+            </div>
+            
+            <p:panel id="panel1" header="Atividades">
+               
+                <h:panelGrid>
+                    <h:outputLabel for="atividade" value="Descrição da Atividade: "/> 
+                            <p:inputTextarea  id="atividade" maxlength="100" counter="restantes" counterTemplate="{0} Caracteres restantes." value="#{solicitanteMB.dados.descricao}"  label="atividade"/>  
+                                <h:outputText id="restantes"/>
+                                <p:message for="atividade" /> 
+                 </h:panelGrid>  
+            </p:panel> 
+            
+            <p:panel id="panel2" header="CNAE Principal">
+                <h:panelGrid>
+                    <h:selectOneMenu id="cnae1" requiredMessage="Campo Obrigatório" value="#{solicitanteMB.dados.cnaePrincipal}" required="true">
+                                <f:selectItem itemLabel="Selecione o CNAE" itemValue="" />
+                                <f:selectItems var="s" value="#{solicitanteMB.listaCnaes()}" itemValue="#{s}" itemLabel="#{s}"/>  
+                            </h:selectOneMenu><p:message for="cnae1" /> 
+                            </h:panelGrid>
+            </p:panel>
+            <p:panel id="panel3" header="CNAE Segundário">
+                <h:panelGrid>
+                <h:selectOneMenu id="cnae2" requiredMessage="Campo Obrigatório" value="#{solicitanteMB.dados.cnaeSecundario}" required="true">
+                                <f:selectItem itemLabel="Selecione o CNAE" itemValue="" />
+                                <f:selectItems var="s" value="#{solicitanteMB.listaCnaes()}" itemValue="#{s}" itemLabel="#{s}"/>  
+                            </h:selectOneMenu><p:message for="cnae2" /> 
+                            </h:panelGrid>
+            </p:panel>
+            
+            <p:panel id="panel4" header="Tipo de Unidade">
+                <h:panelGrid>
+                    <p:outputLabel for="tipounidade" value="Tipo de Unidade: " />
+                            <p:selectOneRadio id="tipounidade" required="true"  requiredMessage="Campo Obrigatório" value="#{solicitanteMB.dados.tipoUnidade}">
+                                <f:selectItem itemLabel="Produtiva"  itemValue="Produtiva" /> 
+                            </p:selectOneRadio>   
+                </h:panelGrid>
+            </p:panel>
+            
+            <p:panel id="form5" header="Forma de atuação Produtiva">
+                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <h:outputText value="Estabelecimento Fixo " />
+                                <p:selectBooleanCheckbox value="#{solicitanteMB.dados.formaAtuacao}" />
+                                <h:outputText value="Internet " />
+                                <p:selectBooleanCheckbox value="#{solicitanteMB.dados.formaAtuacao2}" />
+                                <h:outputText value="Em Local Fixo Fora de Loja " />
+                                <p:selectBooleanCheckbox value="#{solicitanteMB.dados.formaAtuacao3}" />
+                            </h:panelGrid>
+                <p:commandButton  id="voltar" value="Voltar" immediate="true" action="#{solicitanteMB.pagina3()}"/>
+                <p:commandButton  id="enviar" value="Salvar" icon="ui-icon-disk" update="formulario" action="#{solicitanteMB.inserirSolicitacao()}"/>  
+            </p:panel>
+            <br/>
+            <b><h:outputText value="#{solicitanteMB.mensagem}" style="font: bolder"/></b>  
+            
+        </h:form>
+            </ui:define>
+       </ui:composition>
+    </h:body>
+    
+</html>

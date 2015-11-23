@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>SICRHOLAB</title>
+    </h:head>
+    <h:body>
+        
+        <ui:composition template="template.xhtml" >
+
+            <ui:define name="titulo_pagina">Página Inicial</ui:define>
+            
+            <ui:define name="form_manutencao">
+           
+               
+            <h:form>
+                
+                <p:panel>
+                    <h:panelGrid columns="6"  >
+                        <div align="center">
+                        <p:graphicImage url="/img/ufrn.png" width="400px" height="100px"/>
+                        <p:graphicImage url="/img/logo_ceres_novo.png" width="140px" height="70px"/>
+                        <p:graphicImage url="/img/redesim-rn.png" width="140px" height="70px"/>
+                        
+                        </div>
+                        
+                        <h:panelGrid columns="1">
+                            <p:commandButton  id="avancar" value="Iniciar Consulta Prévia"  style="height: 100px; width: 270px; margin-top: 20px; " action="#{solicitanteMB.redeSim()}"/>
+                            <br/>
+                        </h:panelGrid>
+                         
+                    </h:panelGrid>
+                </p:panel>
+              
+            </h:form>  
+            </ui:define>
+            
+            
+        </ui:composition>    
+        
+        
+
+        
+    </h:body>
+</html>
